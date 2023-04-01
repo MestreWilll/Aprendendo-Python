@@ -1,43 +1,60 @@
-def soma(a, b):
-    return a + b
+import tkinter as tk
 
-def subtracao(a, b):
-    return a - b
+def soma():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
+    resultado = num1 + num2
+    label_resultado.config(text=f"Resultado: {resultado}")
 
-def multiplicacao(a, b):
-    return a * b
+def subtracao():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
+    resultado = num1 - num2
+    label_resultado.config(text=f"Resultado: {resultado}")
 
-def divisao(a, b):
+def multiplicacao():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
+    resultado = num1 * num2
+    label_resultado.config(text=f"Resultado: {resultado}")
+
+def divisao():
+    num1 = float(entry_num1.get())
+    num2 = float(entry_num2.get())
     try:
-        return a / b
+        resultado = num1 / num2
+        label_resultado.config(text=f"Resultado: {resultado}")
     except ZeroDivisionError:
-        print("Erro: divisão por zero.")
-        return None
+        label_resultado.config(text="Erro: divisão por zero.")
 
-def calculadora():
-    print("Selecione a operação:")
-    print("1. Adição")
-    print("2. Subtração")
-    print("3. Multiplicação")
-    print("4. Divisão")
+app = tk.Tk()
+app.title("Calculadora")
 
-    escolha = input("Digite sua escolha (1/2/3/4): ")
+label_num1 = tk.Label(app, text="Digite o primeiro número:")
+label_num1.grid(row=0, column=0)
 
-    num1 = float(input("Digite o primeiro número: "))
-    num2 = float(input("Digite o segundo número: "))
+entry_num1 = tk.Entry(app)
+entry_num1.grid(row=0, column=1)
 
-    if escolha == '1':
-        print("Resultado:", soma(num1, num2))
-    elif escolha == '2':
-        print("Resultado:", subtracao(num1, num2))
-    elif escolha == '3':
-        print("Resultado:", multiplicacao(num1, num2))
-    elif escolha == '4':
-        resultado = divisao(num1, num2)
-        if resultado is not None:
-            print("Resultado:", resultado)
-    else:
-        print("Entrada inválida")
+label_num2 = tk.Label(app, text="Digite o segundo número:")
+label_num2.grid(row=1, column=0)
 
-if __name__ == "__main__":
-    calculadora()
+entry_num2 = tk.Entry(app)
+entry_num2.grid(row=1, column=1)
+
+button_soma = tk.Button(app, text="Adição", command=soma)
+button_soma.grid(row=2, column=0)
+
+button_subtracao = tk.Button(app, text="Subtração", command=subtracao)
+button_subtracao.grid(row=2, column=1)
+
+button_multiplicacao = tk.Button(app, text="Multiplicação", command=multiplicacao)
+button_multiplicacao.grid(row=3, column=0)
+
+button_divisao = tk.Button(app, text="Divisão", command=divisao)
+button_divisao.grid(row=3, column=1)
+
+label_resultado = tk.Label(app, text="Resultado:")
+label_resultado.grid(row=4, columnspan=2)
+
+app.mainloop()
